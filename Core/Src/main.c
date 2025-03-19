@@ -18,7 +18,9 @@
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
-
+#include <stm32f10x.h>
+#include <stm32f10x_gpio.h>
+#include <stm32f10x_rcc.h>
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 
@@ -54,6 +56,8 @@ static void MX_GPIO_Init(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
+
+void delayL1(int millisL1);
 
 /* USER CODE END 0 */
 
@@ -94,13 +98,20 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-    /* USER CODE END WHILE */
+    GPIOB->ODR |= GPIO_PIN_7;
+		delayL1 (5);
+		GPIOB->ODR &= ~GPIO_PIN_7;
+		delayL1 (15);
 
-    /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */
 }
 
+
+
+void delayL1 (int millisL1) {
+for(int i=0;i< millisL1*0x010000;i++);
+}
 /**
   * @brief System Clock Configuration
   * @retval None
